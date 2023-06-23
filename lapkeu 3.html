@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Penghitung Laporan Keuangan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+    }
+
+    #transactions-list, #balance {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #balance-amount {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .total {
+      margin-top: 10px;
+      text-align: right;
+      font-weight: bold;
+    }
+
+    .total-label {
+      display: inline-block;
+      width: 120px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Penghitung Laporan Keuangan</h1>
+  
+  <form id="transaction-form">
+    <label for="type">Tipe:</label>
+    <select id="type">
+      <option value="pendapatan">Pendapatan</option>
+      <option value="pengeluaran">Pengeluaran</option>
+    </select>
+
+    <label for="amount">Jumlah:</label>
+    <input type="number" id="amount" placeholder="Masukkan jumlah">
+
+    <button type="submit">Tambahkan</button>
+  </form>
+
+  <div id="transactions-list">
+    <h2>Daftar Transaksi</h2>
+    <ul id="transactions">
+      <!-- Daftar transaksi akan ditambahkan melalui JavaScript -->
+    </ul>
+  </div>
+
+  <div id="balance">
+    <h2>Saldo</h2>
+    <p id="balance-amount">0</p>
+  </div>
+
+  <div class="total">
+    <span class="total-label">Total Pendapatan:</span>
+    <span id="total-income">$0.00</span>
+  </div>
+
+  <div class="total">
+    <span class="total-label">Total Pengeluaran:</span>
+    <span id="total-expenses">$0.00</span>
+  </div>
+
+  <script>
+    const transactionForm = document.getElementById('transaction-form');
+    const transactionType = document.getElementById('type');
+    const transactionAmount = document.getElementById('amount');
+    const transactionsList = document.getElementById('transactions');
+    const balanceAmount = document.getElementById('balance-amount');
+    const totalIncome = document.getElementById('total-income');
+    const totalExpenses = document.getElementById('total-expenses');
+
+    let balance = 0;
+    let income = 0;
+    let expenses = 0;
+
+    transactionForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const type = transactionType.value;
+      const amount = parseFloat(transactionAmount.value);
+
+      if (type === '' || isNaN(amount)) {
+        return;
+      }
+
+      const transaction = document.createElement('
